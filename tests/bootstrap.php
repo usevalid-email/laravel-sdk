@@ -8,8 +8,12 @@ use Illuminate\Log\LogManager;
 $container = new Container();
 Facade::setFacadeApplication($container);
 
-$container->singleton('log', function () {
-    return new LogManager(new Container());
+$container->singleton('log', function () use ($container) {
+    return new LogManager($container);
 });
 
-Log::swap($container->make('log'));
+try {
+    Log::swap($container->make('log'));
+} catch (\Illuminate\Contracts\Container\BindingResolutionException $e) {
+    // do nothing
+}

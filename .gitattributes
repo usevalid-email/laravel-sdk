@@ -13,3 +13,16 @@
 *.profile linguist-language=php
 *.test linguist-language=php
 *.info linguist-language=php
+
+/.github            export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/phpunit.xml.dist   export-ignore
+/art                export-ignore
+/docs               export-ignore
+/tests              export-ignore
+/.editorconfig      export-ignore
+/.php_cs.dist.php   export-ignore
+/phpstan*           export-ignore
+/CHANGELOG.md       export-ignore
+/CONTRIBUTING.md    export-ignore
