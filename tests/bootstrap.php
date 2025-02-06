@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Container\Container;
+use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Log\LogManager;
 
-$container = new Container();
+$container = new Container;
 Facade::setFacadeApplication($container);
 
 $container->singleton('log', function () use ($container) {

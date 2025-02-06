@@ -3,19 +3,48 @@
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use UseValidEmail\LaravelSdk\LaravelSdk;
 
-Validator::extend('valid_email',
+if (! function_exists('validateEmail')) {
     /**
      * @throws GuzzleException
      */
-    function ($attribute, $value, $parameters, $validator) {
+    function validateEmail(string $email)
+    {
         try {
-            $validation = validateEmail($value);
+            $sdk = new LaravelSdk;
 
-            return $validation->status === 'valid' && $validation->disposable === false;
+            return $sdk->emailValidator->validate($email);
         } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return false;
+            if (class_exists('Illuminate\Support\Facades\Log')) {
+                Log::error($e->getMessage());
+            }
+            throw $e;
         }
-    });
+    }
+}
+
+if (! function_exists('valid_email_rule')) {
+    function valid_email_rule()
+    {
+        Validator::extend(
+            'valid_email',
+            /**
+             * @throws GuzzleException
+             */
+            function ($attribute, $value, $parameters, $validator) {
+                try {
+                    $validation = validateEmail($value);
+
+                    return $validation->status === 'valid' && $validation->disposable === false;
+                } catch (Exception $e) {
+                    if (class_exists('Illuminate\Support\Facades\Log')) {
+                        Log::error($e->getMessage());
+                    }
+
+                    return false;
+                }
+            }
+        );
+    }
+}

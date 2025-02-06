@@ -18,7 +18,8 @@ beforeEach(function () {
     $this->emailDto = new ValidateEmailDto('test@example.com');
 });
 
-it('validates an email successfully',
+it(
+    'validates an email successfully',
     /**
      * @throws UnauthorizedException
      * @throws ForbiddenException
@@ -39,7 +40,8 @@ it('validates an email successfully',
         expect($response)->toBeInstanceOf(ValidationResponse::class)
             ->and($response->email)->toBe($this->emailDto->email)
             ->and($response->status)->toBe('valid');
-    });
+    }
+);
 
 it('throws an exception when access token is missing', function () {
     new LaravelSdk(null);
