@@ -48,4 +48,4 @@ jobs:
         composer update --prefer-dist --no-interaction --no-progress
 
     - name: Run test suite
-      run: vendor/bin/phpunit
+      run: vendor/bin/pest
