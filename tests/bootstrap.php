@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../vendor/autoload.php';
+
 use Illuminate\Container\Container;
 use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\Facade;

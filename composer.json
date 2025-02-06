@@ -59,7 +59,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "UseValidEmail\\LaravelSdk\\UseValidEmailServiceProvider"
+                "UseValidEmail\\LaravelSdk\\Providers\\UseValidEmailServiceProvider"
             ],
             "config": {
                 "usevalid-email": "config/usevalid-email.php"
