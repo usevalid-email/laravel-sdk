@@ -54,5 +54,13 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": ["UseValidEmail\\LaravelSdk\\UseValidEmailServiceProvider"],
+      "config": {
+        "usevalid-email": "config/usevalid-email.php"
+      }
+    }
   }
 }
