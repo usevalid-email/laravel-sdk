@@ -1,7 +1,0 @@
----
-description: PHP Standards Recommendations
-globs: 
----
-# Contributing
-
-- **[PSR-2 Coding Standard](mdc:https:/github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](mdc:http:/pear.php.net/package/PHP_CodeSniffer).
