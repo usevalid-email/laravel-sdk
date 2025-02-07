@@ -1,9 +1,9 @@
 <?php
 
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use UseValidEmail\LaravelSdk\LaravelSdk;
+use UseValidEmail\LaravelSdk\Rules\ValidEmailRule;
 
 if (! function_exists('validateEmail')) {
     /**
@@ -16,9 +16,6 @@ if (! function_exists('validateEmail')) {
 
             return $sdk->emailValidator->validate($email);
         } catch (Exception $e) {
-            if (class_exists('Illuminate\Support\Facades\Log')) {
-                Log::error($e->getMessage());
-            }
             throw $e;
         }
     }
@@ -35,11 +32,16 @@ Validator::extend(
 
             return $validation->status === 'valid';
         } catch (Exception $e) {
-            if (class_exists('Illuminate\Support\Facades\Log')) {
-                Log::error($e->getMessage());
-            }
-
             return false;
         }
     }
 );
+
+if (! function_exists('valid_email_rule')) {
+    function valid_email_rule()
+    {
+        return function () {
+            return new ValidEmailRule(config('usevalidemail.access_token'));
+        };
+    }
+}
