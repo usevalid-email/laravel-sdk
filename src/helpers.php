@@ -24,27 +24,22 @@ if (! function_exists('validateEmail')) {
     }
 }
 
-if (! function_exists('valid_email_rule')) {
-    function valid_email_rule()
-    {
-        Validator::extend(
-            'valid_email',
-            /**
-             * @throws GuzzleException
-             */
-            function ($attribute, $value, $parameters, $validator) {
-                try {
-                    $validation = validateEmail($value);
+Validator::extend(
+    'valid_email',
+    /**
+     * @throws GuzzleException
+     */
+    function ($attribute, $value, $parameters, $validator) {
+        try {
+            $validation = validateEmail($value);
 
-                    return $validation->status === 'valid' && $validation->disposable === false;
-                } catch (Exception $e) {
-                    if (class_exists('Illuminate\Support\Facades\Log')) {
-                        Log::error($e->getMessage());
-                    }
-
-                    return false;
-                }
+            return $validation->status === 'valid';
+        } catch (Exception $e) {
+            if (class_exists('Illuminate\Support\Facades\Log')) {
+                Log::error($e->getMessage());
             }
-        );
+
+            return false;
+        }
     }
-}
+);
