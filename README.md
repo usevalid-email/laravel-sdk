@@ -51,21 +51,16 @@ if ($validator->fails()) {
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class EmailValidationController extends Controller
 {
-    public function validateEmail(Request $request)
+    public function validateEmail(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|valid_email',
+        $request->validate([
+            'email' => 'required|email|valid_email',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['message' => 'Invalid email.'], 400);
-        }
-
-        return response()->json(['message' => 'Valid email.'], 200);
+        return back()->with('success', 'Valid email.');
     }
 }
 ```
